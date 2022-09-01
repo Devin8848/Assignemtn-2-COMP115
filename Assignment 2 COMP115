@@ -1,0 +1,137 @@
+final int N_PARTITIONS = 10;
+int heightx, widthx = 0;
+int lastX, lastY, firstX, firstY;
+PVector[] vectors = new PVector[99];
+PVector[] intersections = new PVector[100];
+int n, k = 0;
+//int a, b = 0;
+
+void setup(){
+  size(600,360);
+  background(255);
+  while(widthx <= width && heightx <= height){
+  if (N_PARTITIONS<100){
+        line(0,heightx,width, heightx);
+        heightx = heightx + height/N_PARTITIONS;
+      }
+   if (N_PARTITIONS<100){
+        line(widthx,0,widthx, height);
+        widthx = widthx + width/N_PARTITIONS;
+   } }
+   widthx = 0;
+   heightx = 0;
+}
+
+void draw(){}
+
+void mousePressed(){
+  //reset
+  background(255);
+  while(widthx <= width && heightx <= height){
+  if (N_PARTITIONS<100){
+        line(0,heightx,width, heightx);
+        heightx = heightx + height/N_PARTITIONS;
+      }
+   if (N_PARTITIONS<100){
+        line(widthx,0,widthx, height);
+        widthx = widthx + width/N_PARTITIONS;
+   } 
+   //intersections[k] = new PVector(widthx, heightx);
+   //k++;
+  }
+  widthx = 0;
+  heightx = 0;
+  
+  //draw
+  //for(int j = 0; j<k; j++){
+  //  a = abs(floor(mouseX) - int(intersections[j].x));
+  //  b = abs(floor(mouseY) - int(intersections[j].y)); 
+  //}
+  vectors[n] = new PVector(mouseX, mouseY);
+  print(" " + vectors[n] + " ");
+  for(int i = 0; i<=n; i++){
+    fill(0);
+    ellipse(vectors[i].x, vectors[i].y, 10, 10);
+    if(i != n){
+     line(vectors[i].x, vectors[i].y, vectors[i+1].x, vectors[i+1].y);  
+    }
+    else{
+      line(vectors[0].x, vectors[0].y, vectors[i].x, vectors[i].y);
+    }
+  }
+  n++;
+}
+
+void keyPressed(){
+  background(255);
+  while(widthx <= width && heightx <= height){
+  if (N_PARTITIONS<100){
+        line(0,heightx,width, heightx);
+        heightx = heightx + height/N_PARTITIONS;
+      }
+   if (N_PARTITIONS<100){
+        line(widthx,0,widthx, height);
+        widthx = widthx + width/N_PARTITIONS;
+   } 
+  }
+  widthx = 0;
+  heightx = 0;
+  
+  if(keyCode == UP){
+    print(n + " ");
+   for(int i = 0; i<n; i++){
+     print(i);
+    vectors[i].y -= N_PARTITIONS; 
+    fill(0);
+    ellipse(vectors[i].x, vectors[i].y, 10, 10);
+    if(i < n-1){
+     line(vectors[i].x, vectors[i].y, vectors[i+1].x, vectors[i+1].y);  
+    }
+    else{
+      line(vectors[0].x, vectors[0].y, vectors[i].x, vectors[i].y);
+    }
+   }
+  }
+  
+  if(keyCode == DOWN){
+   for(int i = 0; i<n; i++){
+    vectors[i].y += N_PARTITIONS; 
+    fill(0);
+    ellipse(vectors[i].x, vectors[i].y, 10, 10);
+    if(i < n-1){
+     line(vectors[i].x, vectors[i].y, vectors[i+1].x, vectors[i+1].y);  
+    }
+    else{
+      line(vectors[0].x, vectors[0].y, vectors[i].x, vectors[i].y);
+    }
+   }
+  }
+  
+  if(keyCode == RIGHT){
+   for(int i = 0; i<n; i++){
+    vectors[i].x += N_PARTITIONS; 
+    fill(0);
+    ellipse(vectors[i].x, vectors[i].y, 10, 10);
+    if(i < n-1){
+     line(vectors[i].x, vectors[i].y, vectors[i+1].x, vectors[i+1].y);  
+    }
+    else{
+      line(vectors[0].x, vectors[0].y, vectors[i].x, vectors[i].y);
+    }
+   }
+  }
+  
+  if(keyCode == LEFT){
+   for(int i = 0; i<n; i++){
+    vectors[i].x -= N_PARTITIONS; 
+    fill(0);
+    ellipse(vectors[i].x, vectors[i].y, 10, 10);
+    if(i < n-1){
+     line(vectors[i].x, vectors[i].y, vectors[i+1].x, vectors[i+1].y);  
+    }
+    else{
+      line(vectors[0].x, vectors[0].y, vectors[i].x, vectors[i].y);
+    }
+   }
+  }
+}
